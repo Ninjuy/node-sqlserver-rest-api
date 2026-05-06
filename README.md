@@ -1,62 +1,74 @@
 # node-sqlserver-rest-api
 
-> Production-ready REST API boilerplate — Node.js + TypeScript + SQL Server.
+> **EN:** Production-ready REST API boilerplate — Node.js + TypeScript + SQL Server.
 > Includes JWT authentication, role-based access control, pagination, Zod validation, and structured error handling.
+>
+> **TH:** REST API boilerplate พร้อม production — Node.js + TypeScript + SQL Server
+> มาพร้อม JWT authentication, role-based access control, pagination, Zod validation และ error handling แบบมีโครงสร้าง
 
 ---
 
-## Endpoints
+## Endpoints / เส้นทาง API
 
-### Auth
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/api/auth/register` | Register new user |
-| POST | `/api/auth/login` | Login, returns JWT |
+### Auth / การยืนยันตัวตน
 
-### Users (requires JWT)
-| Method | Path | Access | Description |
-|--------|------|--------|-------------|
-| GET | `/api/users` | Admin | List all users (paginated) |
-| GET | `/api/users/:id` | Self / Admin | Get user by ID |
-| PATCH | `/api/users/:id` | Self / Admin | Update user |
-| DELETE | `/api/users/:id` | Admin | Delete user |
+| Method | Path | EN | TH |
+|--------|------|----|----|
+| POST | `/api/auth/register` | Register new user | ลงทะเบียนผู้ใช้ใหม่ |
+| POST | `/api/auth/login` | Login, returns JWT | เข้าสู่ระบบ รับ JWT กลับมา |
+
+### Users (ต้องใช้ JWT)
+
+| Method | Path | Access | EN | TH |
+|--------|------|--------|----|----|
+| GET | `/api/users` | Admin | List all users (paginated) | ดูรายชื่อผู้ใช้ทั้งหมด |
+| GET | `/api/users/:id` | Self / Admin | Get user by ID | ดูข้อมูลผู้ใช้รายบุคคล |
+| PATCH | `/api/users/:id` | Self / Admin | Update user | อัปเดตข้อมูลผู้ใช้ |
+| DELETE | `/api/users/:id` | Admin | Delete user | ลบผู้ใช้ |
 
 ### System
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/health` | Health check |
+
+| Method | Path | EN | TH |
+|--------|------|----|----|
+| GET | `/health` | Health check | ตรวจสอบสถานะ server |
 
 ---
 
-## Getting Started
+## Getting Started / เริ่มต้นใช้งาน
 
-### 1. Clone & install
+### 1. Clone & Install / โคลนและติดตั้ง
+
 ```bash
-git clone https://github.com/YOUR_USERNAME/node-sqlserver-rest-api.git
+git clone https://github.com/Ninjuy/node-sqlserver-rest-api.git
 cd node-sqlserver-rest-api
 npm install
 ```
 
-### 2. Set up database
+### 2. Set up database / ตั้งค่าฐานข้อมูล
+
 ```bash
-# Run the schema script in SQL Server Management Studio or sqlcmd
+# EN: Run the schema script in SQL Server Management Studio or sqlcmd
+# TH: รัน schema script ใน SQL Server Management Studio หรือ sqlcmd
 sqlcmd -S localhost -i sql/schema.sql
 ```
 
-### 3. Configure environment
+### 3. Configure environment / ตั้งค่า environment
+
 ```bash
 cp .env.example .env
-# Edit .env with your SQL Server credentials
+# EN: Edit .env with your SQL Server credentials
+# TH: แก้ไข .env ด้วย SQL Server credentials ของคุณ
 ```
 
-### 4. Start development server
+### 4. Start development server / เริ่ม server
+
 ```bash
 npm run dev
 ```
 
 ---
 
-## Project Structure
+## Project Structure / โครงสร้างโปรเจกต์
 
 ```
 src/
@@ -82,28 +94,28 @@ sql/
 
 ---
 
-## Extending This Boilerplate
+## Extending / ต่อยอด
 
-- **Add a new resource** — create `models/`, `controllers/`, `routes/` files following the same pattern
-- **Add more tables** — extend `sql/schema.sql`
-- **Refresh tokens** — add `refresh_tokens` table and `/api/auth/refresh` endpoint
-- **File uploads** — add `multer` middleware and an `/api/uploads` route
-- **Rate limiting** — add `express-rate-limit` in `app.ts`
+- **เพิ่ม resource ใหม่** — สร้างไฟล์ `models/`, `controllers/`, `routes/` ตาม pattern เดิม
+- **เพิ่ม table** — ขยาย `sql/schema.sql`
+- **Refresh tokens** — เพิ่ม table `refresh_tokens` และ endpoint `/api/auth/refresh`
+- **File uploads** — เพิ่ม middleware `multer` และ route `/api/uploads`
+- **Rate limiting** — เพิ่ม `express-rate-limit` ใน `app.ts`
 
 ---
 
 ## Tech Stack
 
-| Package | Purpose |
-|---------|---------|
+| Package | Purpose / หน้าที่ |
+|---------|-------------------|
 | express | Web framework |
-| mssql | SQL Server driver |
-| bcryptjs | Password hashing |
-| jsonwebtoken | JWT auth |
-| zod | Request validation |
-| helmet | Security headers |
+| mssql | SQL Server driver / ตัวเชื่อมต่อ SQL Server |
+| bcryptjs | Password hashing / เข้ารหัสรหัสผ่าน |
+| jsonwebtoken | JWT authentication |
+| zod | Request validation / ตรวจสอบ input |
+| helmet | Security headers / header ความปลอดภัย |
 | cors | CORS handling |
-| morgan | HTTP logging |
+| morgan | HTTP logging / บันทึก HTTP request |
 
 ## License
 
